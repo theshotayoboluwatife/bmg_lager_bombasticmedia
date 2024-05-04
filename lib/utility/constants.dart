@@ -23,4 +23,5 @@ class AppColor {
   AppColor._();
   static Color red = const Color(0xfff40d0d);
   static Color blue = const Color(0xff18396b);
+  static Color grey = const Color(0xff979797);
 }

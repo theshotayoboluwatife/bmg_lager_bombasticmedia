@@ -6,7 +6,7 @@ import '../features/authentication/presentation/login_signup_screen.dart';
 class AppNavigation {
   AppNavigation._();
 
-  static String initial = '/home';
+  static String initial = '/login-signup';
 
   // Private navigators
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();

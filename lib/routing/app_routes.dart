@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/authentication/presentation/login_signup_screen.dart';
+import '../features/authentication/presentation/sign_in_screen.dart';
 
 class AppNavigation {
   AppNavigation._();
@@ -21,11 +21,10 @@ class AppNavigation {
         parentNavigatorKey: _rootNavigatorKey,
         path: '/login-signup',
         name: "LoginSignUp",
-        builder: (context, state) => LoginSignUpScreen(
+        builder: (context, state) => SignInScreen(
           key: state.pageKey,
         ),
       ),
-
     ],
   );
 }

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../utility/constants.dart';
 import 'app_text_fields.dart';
 
 class EmailTextField extends StatefulWidget {
-  final TextEditingController controller;
-  final TextInputType textInputType;
+  final TextEditingController emailController;
 
   const EmailTextField({
     super.key,
-    required this.controller,
-    required this.textInputType,
+    required this.emailController,
   });
 
   @override
@@ -22,19 +18,19 @@ class _EmailTextField extends State<EmailTextField> {
   @override
   void dispose() {
     super.dispose();
-    widget.controller.dispose();
+    widget.emailController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AppTextField(
       child: TextFormField(
-        controller: widget.controller,
+        controller: widget.emailController,
         style: const TextStyle(color: Colors.black),
-        keyboardType: widget.textInputType,
+        keyboardType: TextInputType.emailAddress,
         autofillHints: const [AutofillHints.email],
         decoration: const InputDecoration(
-          border: null,
+          border: InputBorder.none,
           isDense: true,
         ),
       ),
@@ -44,12 +40,10 @@ class _EmailTextField extends State<EmailTextField> {
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
-  final TextInputType textInputType;
 
   const PasswordTextField({
     super.key,
     required this.controller,
-    required this.textInputType,
   });
 
   @override
@@ -72,27 +66,26 @@ class _PasswordTextFieldState extends State<PasswordTextField>
       child: TextField(
         controller: widget.controller,
         style: const TextStyle(color: Colors.black),
-        keyboardType: widget.textInputType,
+        keyboardType: TextInputType.visiblePassword,
         obscureText: !isVisible,
         decoration: InputDecoration(
-          border: null,
-          isDense: true,
-          suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                isVisible = !isVisible;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: FaIcon(
-                isVisible ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
-                color: const Color(0xffFA4A0C),
-                size: 20,
-              ),
+            border: InputBorder.none,
+            isDense: true,
+            suffixIconConstraints: const BoxConstraints(
+              maxWidth: 40,
+              maxHeight: 40,
             ),
-          ),
-        ),
+            suffixIcon: IconButton(
+              alignment: Alignment.topCenter,
+              onPressed: () {
+                setState(() {
+                  isVisible = !isVisible;
+                });
+              },
+              icon: isVisible
+                  ? const Icon(Icons.visibility_outlined)
+                  : const Icon(Icons.visibility_off_outlined),
+            )),
       ),
     );
   }

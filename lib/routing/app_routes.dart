@@ -6,7 +6,7 @@ import '../features/authentication/presentation/sign_in_screen.dart';
 class AppNavigation {
   AppNavigation._();
 
-  static String initial = '/login-signup';
+  static String initial = '/sign-in';
 
   // Private navigators
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,8 +19,8 @@ class AppNavigation {
       /// LoginSignUp
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
-        path: '/login-signup',
-        name: "LoginSignUp",
+        path: '/sign-in',
+        name: "SignIn",
         builder: (context, state) => SignInScreen(
           key: state.pageKey,
         ),

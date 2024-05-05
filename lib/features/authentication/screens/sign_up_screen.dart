@@ -36,7 +36,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               fontWeight: FontWeight.w500,
               textAlign: TextAlign.center,
             ),
-            actions: [AppButton(onPressed: () {}, text: 'Go to Home')],
+            actions: [
+              AppButton(
+                onPressed: () => context.goNamed('Home'),
+                text: 'Go to Home',
+              )
+            ],
             content: AppText(
               text: 'Your account has been created',
               fontWeight: FontWeight.w400,

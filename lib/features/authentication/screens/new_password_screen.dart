@@ -48,8 +48,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        height: double.infinity,
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child:  SafeArea(

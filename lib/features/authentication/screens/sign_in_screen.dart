@@ -69,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                  Gap(size.height*0.35),
                 AppButton(
-                    onPressed: () => context.goNamed('Home'),
+                    onPressed: () => context.goNamed('Products'),
                     text: 'Log in'),
                 const Gap(8.0),
                 Align(

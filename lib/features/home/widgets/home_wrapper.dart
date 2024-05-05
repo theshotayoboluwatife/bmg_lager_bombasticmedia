@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 import '../../../utility/constants.dart';
 
@@ -76,35 +75,6 @@ class _HomeWrapperState extends State<HomeWrapper> {
           _goBranch(selectedIndex);
         },
       ),
-
-      /* SlidingClippedNavBar(
-        backgroundColor: const Color(0xfff7f7f7),
-        onButtonPressed: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-          _goBranch(selectedIndex);
-        },
-        iconSize: 30,
-        inactiveColor: const Color(0xff6d6e76),
-        activeColor: AppColor.blue,
-        selectedIndex: selectedIndex,
-
-        barItems: [
-          BarItem(
-            icon: Icons.shopping_bag_rounded,
-            title: 'Products',
-          ),
-          BarItem(
-            icon: Icons.search_sharp,
-            title: 'Search',
-          ),
-          BarItem(
-            icon: Icons.qr_code_scanner_sharp,
-            title: 'Scan',
-          ),
-        ],
-      ),*/
     );
   }
 }

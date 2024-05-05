@@ -1,7 +1,7 @@
 import 'package:BmgLager/features/authentication/screens/forget_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/new_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/verify_otp_screen.dart';
-import 'package:BmgLager/features/home/screens/home_screen.dart';
+import 'package:BmgLager/features/home/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +9,7 @@ import '../features/authentication/screens/sign_in_screen.dart';
 import '../features/authentication/screens/sign_up_screen.dart';
 import '../features/home/screens/export_inventory_screen.dart';
 import '../features/home/screens/scan_qr_screen.dart';
+import '../features/home/screens/search_screen.dart';
 import '../features/home/widgets/home_wrapper.dart';
 
 class AppNavigation {
@@ -18,9 +19,9 @@ class AppNavigation {
 
   // Private navigators
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorHome =
+  static final _shellNavigatorProducts =
       GlobalKey<NavigatorState>(debugLabel: 'shellHome');
-  static final _shellNavigatorExport =
+  static final _shellNavigatorSearch =
       GlobalKey<NavigatorState>(debugLabel: 'shellExport');
   static final _shellNavigatorScanQR =
       GlobalKey<NavigatorState>(debugLabel: 'shellScanQR');
@@ -38,15 +39,63 @@ class AppNavigation {
           );
         },
         branches: <StatefulShellBranch>[
-          /// Home
+          /// Products
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorHome,
+            navigatorKey: _shellNavigatorProducts,
             routes: <RouteBase>[
               GoRoute(
-                path: "/home",
-                name: "Home",
+                path: "/products",
+                name: "Products",
                 builder: (BuildContext context, GoRouterState state) =>
-                    const HomeScreen(),
+                    const ProductScreen(),
+                /* routes: [
+                  GoRoute(
+                    path: 'menu',
+                    name: 'Menu',
+                    pageBuilder: (context, state) => CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      child: const MenuDrawer(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'order',
+                    name: 'Order',
+                    pageBuilder: (context, state) => CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      child: const OrderScreen(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'food-combo',
+                    name: 'FoodCombo',
+                    pageBuilder: (context, state) => CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      child: const FoodComboScreen(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                    ),
+                  ),
+                ],*/
+              ),
+            ],
+          ),
+
+          /// Search
+          StatefulShellBranch(
+            navigatorKey: _shellNavigatorSearch,
+            routes: <RouteBase>[
+              GoRoute(
+                path: "/search",
+                name: "Search",
+                builder: (BuildContext context, GoRouterState state) =>
+                const SearchScreen(),
                 /* routes: [
                   GoRoute(
                     path: 'menu',
@@ -87,7 +136,7 @@ class AppNavigation {
           ),
 
           ///   Export
-          StatefulShellBranch(
+         /* StatefulShellBranch(
             navigatorKey: _shellNavigatorExport,
             routes: <RouteBase>[
               GoRoute(
@@ -96,14 +145,14 @@ class AppNavigation {
                 builder: (BuildContext context, GoRouterState state) =>
                     const ExportInventoryScreen(),
               ),
-              /* GoRoute(
+              *//* GoRoute(
                 path: "/user-profile",
                 name: "UserProfile",
                 builder: (BuildContext context, GoRouterState state) =>
                 const UserProfileScreen(),
-              ),*/
+              ),*//*
             ],
-          ),
+          ),*/
 
           ///   Scan QR
           StatefulShellBranch(

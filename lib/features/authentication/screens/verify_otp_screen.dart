@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -10,12 +11,14 @@ class VerifyOTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String time = '00:34';
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(
             Icons.navigate_before,
             color: Colors.black,
+            size: 32,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -43,8 +46,7 @@ class VerifyOTPScreen extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
-              const Gap(20),
-
+              const Gap(30),
               ///OTP FIELD PACKAGE
               Container(
                 width: double.infinity,
@@ -52,11 +54,9 @@ class VerifyOTPScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
               const Gap(30),
-              Row(
-                children: [
-
-                ],
-              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: AppText(text: 'Send code again      $time')),
               const Spacer(),
               AppButton(onPressed: () {}, text: 'Confirm'),
             ],

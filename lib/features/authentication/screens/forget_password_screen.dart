@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
@@ -25,14 +25,8 @@ class ForgetPasswordScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child: SafeArea(
@@ -48,7 +42,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               const Gap(10),
               AppText(
                 text:
-                'Please enter your email address. An OTP code will be sent for verification',
+                    'Please enter your email address. An OTP code will be sent for verification',
                 color: AppColor.grey,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -62,7 +56,9 @@ class ForgetPasswordScreen extends StatelessWidget {
               const Gap(8.0),
               EmailTextField(emailController: emailController),
               const Spacer(),
-              AppButton(onPressed: () {}, text: 'Send Code'),
+              AppButton(
+                  onPressed: () => context.goNamed('VerifyOTP'),
+                  text: 'Send Code'),
             ],
           ),
         ),

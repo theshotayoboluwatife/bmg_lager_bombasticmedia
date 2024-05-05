@@ -21,8 +21,8 @@ class AppDialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.2,
-      padding: const EdgeInsets.all(12.0),
+      height: MediaQuery.of(context).size.height * 0.24,
+      padding: const EdgeInsets.only(left:12.0, right: 12.0),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
       child: Column(
@@ -37,10 +37,10 @@ class AppDialogBox extends StatelessWidget {
           AppText(
             text: promptDescription,
             fontWeight: FontWeight.w400,
-            fontSize: 15,
+            fontSize: 14,
             color: AppColor.grey,
           ),
-          const Gap(24.0),
+          const Gap(40.0),
           AppButton(onPressed: onPressed, text: buttonText)
         ],
       ),

@@ -27,14 +27,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: AppDialogBox(
-              promptTitle: 'Account Successful',
-              promptDescription: 'Your account has been created',
-              buttonText: 'Go to Home',
-              onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Close the dialog when the button is pressed
-              },
+            alignment: Alignment.center,
+            surfaceTintColor: Colors.white,
+            backgroundColor: Colors.white,
+            title: const AppText(
+              text: 'Account Successful',
+              fontWeight: FontWeight.w500,
+              textAlign: TextAlign.center,
+            ),
+            actions: [AppButton(onPressed: () {}, text: 'Go to Home')],
+            content: AppText(
+              text: 'Your account has been created',
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: AppColor.grey,
+              textAlign: TextAlign.center,
             ),
           );
         },

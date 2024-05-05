@@ -1,4 +1,5 @@
 import 'package:BmgLager/features/authentication/screens/forget_password_screen.dart';
+import 'package:BmgLager/features/authentication/screens/new_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -55,6 +56,16 @@ class AppNavigation {
         path: '/verify-otp',
         name: "VerifyOTP",
         builder: (context, state) => VerifyOTPScreen(
+          key: state.pageKey,
+        ),
+      ),
+
+      ///Set New Password
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/new-password',
+        name: "NewPassword",
+        builder: (context, state) => NewPasswordScreen(
           key: state.pageKey,
         ),
       ),

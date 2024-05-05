@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utility/constants.dart';
 import '../../../widgets/app_button.dart';
@@ -47,6 +48,7 @@ class VerifyOTPScreen extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
               const Gap(30),
+
               ///OTP FIELD PACKAGE
               Container(
                 width: double.infinity,
@@ -58,7 +60,9 @@ class VerifyOTPScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   child: AppText(text: 'Send code again      $time')),
               const Spacer(),
-              AppButton(onPressed: () {}, text: 'Confirm'),
+              AppButton(
+                  onPressed: () => context.goNamed('NewPassword'),
+                  text: 'Confirm'),
             ],
           ),
         ),

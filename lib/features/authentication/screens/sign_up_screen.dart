@@ -1,5 +1,4 @@
 import 'package:BmgLager/widgets/app_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -7,18 +6,21 @@ import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+
+    final TextEditingController confirmPasswordController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -32,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const AppText(
-                  text: 'Hello there',
+                  text: 'Create account',
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
@@ -57,25 +59,22 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 const Gap(8.0),
                 PasswordTextField(controller: passwordController),
-                const Gap(12.0),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const AppText(
-                      text: 'Forgot password?',
-                    ),
-                  ),
+                const Gap(30.0),
+                const AppText(
+                  text: 'Confirm Password',
                 ),
+                const Gap(8.0),
+                PasswordTextField(controller: confirmPasswordController),
                 const Gap(120.0),
-                AppButton(onPressed: () {}, text: 'Log in'),
+                AppButton(onPressed: () {}, text: 'Create Account'),
                 const Gap(8.0),
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {},
                     child: const AppText(
-                      text: 'Create Account',
+                      text: 'Already have an account? Sign In',
+                      fontSize: 12,
                     ),
                   ),
                 ),

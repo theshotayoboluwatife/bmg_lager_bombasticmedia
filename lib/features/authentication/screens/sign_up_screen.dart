@@ -1,11 +1,9 @@
 import 'package:BmgLager/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
-import '../widgets/dialog_box.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -22,7 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
-    void _showDialog() {
+    void showDialogBox() {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -94,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 PasswordTextField(controller: confirmPasswordController),
                 const Gap(120.0),
                 AppButton(
-                    onPressed: () => _showDialog(), text: 'Create Account'),
+                    onPressed: () => showDialogBox(), text: 'Create Account'),
                 const Gap(8.0),
                 Align(
                   alignment: Alignment.center,

@@ -1,9 +1,9 @@
+import 'package:BmgLager/features/authentication/screens/forget_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/authentication/screens/sign_in_screen.dart';
 import '../features/authentication/screens/sign_up_screen.dart';
-
 
 class AppNavigation {
   AppNavigation._();
@@ -34,6 +34,16 @@ class AppNavigation {
         path: '/sign-up',
         name: "SignUp",
         builder: (context, state) => SignUpScreen(
+          key: state.pageKey,
+        ),
+      ),
+
+      ///Forget Password
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/forget-password',
+        name: "ForgetPassword",
+        builder: (context, state) => ForgetPasswordScreen(
           key: state.pageKey,
         ),
       ),

@@ -60,20 +60,24 @@ class _SignInScreenState extends State<SignInScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => context.goNamed('ForgetPassword'),
                     child: const AppText(
                       text: 'Forgot password?',
                     ),
                   ),
                 ),
                 const Gap(120.0),
-                AppButton(onPressed: () {}, text: 'Log in'),
+                AppButton(
+                    onPressed: () {},
+                    //context.goNamed(''),
+                    text: 'Log in'),
                 const Gap(8.0),
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
-                      context.goNamed('SignUp');                    },
+                      context.goNamed('SignUp');
+                    },
                     child: const AppText(
                       text: 'Create Account',
                     ),

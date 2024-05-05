@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -15,6 +16,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     final TextEditingController confirmPasswordController =
         TextEditingController();
     final TextEditingController emailController = TextEditingController();
@@ -48,8 +51,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        height: double.infinity,
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child: SingleChildScrollView(
@@ -97,7 +100,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.goNamed('SignIn');
+                    },
                     child: const AppText(
                       text: 'Already have an account? Sign In',
                       fontSize: 12,

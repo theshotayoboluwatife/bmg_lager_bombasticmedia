@@ -18,10 +18,11 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final size =  MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        height: double.infinity,
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child: SingleChildScrollView(
@@ -66,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                const Gap(120.0),
+                 Gap(size.height*0.35),
                 AppButton(
                     onPressed: () {},
                     //context.goNamed(''),

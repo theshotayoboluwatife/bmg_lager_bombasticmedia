@@ -86,12 +86,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const Gap(8.0),
                 PasswordTextField(controller: confirmPasswordController),
                 const Gap(120.0),
-                AppButton(onPressed: () {}, text: 'Create Account'),
+                AppButton(
+                    onPressed: () => _showDialog(), text: 'Create Account'),
                 const Gap(8.0),
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () => _showDialog(),
+                    onPressed: () {},
                     child: const AppText(
                       text: 'Already have an account? Sign In',
                       fontSize: 12,

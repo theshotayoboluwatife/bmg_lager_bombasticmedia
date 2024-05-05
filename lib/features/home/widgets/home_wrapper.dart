@@ -48,6 +48,9 @@ class _HomeWrapperState extends State<HomeWrapper> {
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/scan_qr_icon.png',
+              color: (selectedIndex == 2)
+                  ? AppColor.blue
+                  : const Color(0xff6d6e76),
               width: 30,
               height: 30,
             ),
@@ -61,9 +64,9 @@ class _HomeWrapperState extends State<HomeWrapper> {
         unselectedItemColor: const Color(0xff6d6e76),
         selectedItemColor: AppColor.blue,
         selectedLabelStyle: TextStyle(
-            fontSize: 10, fontWeight: FontWeight.w500, color: AppColor.blue),
+            fontSize: 12, fontWeight: FontWeight.w500, color: AppColor.blue),
         unselectedLabelStyle: const TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             fontWeight: FontWeight.w300,
             color: Color(0xff6d6e76)),
         onTap: (index) {

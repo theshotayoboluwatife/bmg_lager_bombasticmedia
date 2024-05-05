@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
+import '../widgets/dialog_box.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,10 +17,29 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-
-    final TextEditingController confirmPasswordController = TextEditingController();
+    final TextEditingController confirmPasswordController =
+        TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+
+    void _showDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: AppDialogBox(
+              promptTitle: 'Account Successful',
+              promptDescription: 'Your account has been created',
+              buttonText: 'Go to Home',
+              onPressed: () {
+                Navigator.of(context)
+                    .pop(); // Close the dialog when the button is pressed
+              },
+            ),
+          );
+        },
+      );
+    }
 
     return Scaffold(
       body: Container(
@@ -71,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Align(
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => _showDialog(),
                     child: const AppText(
                       text: 'Already have an account? Sign In',
                       fontSize: 12,

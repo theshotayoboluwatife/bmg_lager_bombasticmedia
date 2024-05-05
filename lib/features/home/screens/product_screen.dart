@@ -1,6 +1,5 @@
 import 'package:BmgLager/features/home/widgets/grades_dropdown_container.dart';
 import 'package:BmgLager/features/home/widgets/product_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:BmgLager/widgets/app_text.dart';
@@ -15,7 +14,6 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController searchTextController = TextEditingController();
     final list = ProductsRepo.products;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -59,24 +57,29 @@ class ProductScreen extends StatelessWidget {
                             searchTextController: searchTextController)),
                     const Gap(4.0),
                     const GradesDropDownContainer(),
-
                   ],
                 ),
                 const Gap(20.0),
                 Flexible(
                   child: SizedBox(
                     width: double.infinity,
-                    child:
-                    ListView.builder(
+                    child: ListView.separated(
                       itemCount: list.length,
                       scrollDirection: Axis.vertical,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(
+                        color: AppColor.grey,
+                        thickness: 1.1,
+                      ),
                       itemBuilder: (context, index) {
-                      return ProductItem(imageUrl: list[index].imageUrl,
-                          productName: list[index].productName,
-                          location: list[index].location,
-                          productId: list[index].productId,
-                          status: list[index].status);
-                    },),
+                        return ProductItem(
+                            imageUrl: list[index].imageUrl,
+                            productName: list[index].productName,
+                            location: list[index].location,
+                            productId: list[index].productId,
+                            status: list[index].status);
+                      },
+                    ),
                   ),
                 )
               ],

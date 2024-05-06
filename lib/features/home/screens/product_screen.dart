@@ -6,6 +6,7 @@ import 'package:BmgLager/widgets/app_text.dart';
 import '../../../utility/constants.dart';
 import '../data/products_repo.dart';
 import '../widgets/search_container.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -44,7 +45,6 @@ class ProductScreen extends StatelessWidget {
           color: Colors.white,
           size: 36,
         ),
-
       ),
       body: Container(
         width: double.infinity,
@@ -86,12 +86,17 @@ class ProductScreen extends StatelessWidget {
                           thickness: 1.0,
                         ),
                         itemBuilder: (context, index) {
-                          return ProductItem(
-                              imageUrl: list[index].imageUrl,
-                              productName: list[index].productName,
-                              location: list[index].location,
-                              productId: list[index].productId,
-                              status: list[index].status);
+                          return InkWell(
+                            onTap: () {
+                              context.goNamed('ProductDetails');
+                            },
+                            child: ProductItem(
+                                imageUrl: list[index].imageUrl,
+                                productName: list[index].productName,
+                                location: list[index].location,
+                                productId: list[index].productId,
+                                status: list[index].status),
+                          );
                         },
                       ),
                     ),

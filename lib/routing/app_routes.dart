@@ -1,6 +1,7 @@
 import 'package:BmgLager/features/authentication/screens/forget_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/new_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/verify_otp_screen.dart';
+import 'package:BmgLager/features/home/screens/product_details_screen.dart';
 import 'package:BmgLager/features/home/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -47,6 +48,22 @@ class AppNavigation {
                 name: "Products",
                 builder: (BuildContext context, GoRouterState state) =>
                     const ProductScreen(),
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: 'product-details',
+                    name: "ProductDetails",
+                    pageBuilder: (context, state) => CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      child:   ProductDetailsScreen(
+                        key: state.pageKey,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) =>
+                          FadeTransition(opacity: animation, child: child),
+                    ),
+                  )
+                ]
               ),
             ],
           ),

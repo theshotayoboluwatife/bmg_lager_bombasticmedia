@@ -1,8 +1,10 @@
 import 'package:BmgLager/features/authentication/screens/forget_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/new_password_screen.dart';
 import 'package:BmgLager/features/authentication/screens/verify_otp_screen.dart';
+import 'package:BmgLager/features/home/screens/add_product_screen.dart';
 import 'package:BmgLager/features/home/screens/product_details_screen.dart';
 import 'package:BmgLager/features/home/screens/product_screen.dart';
+import 'package:BmgLager/features/map/map_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -44,27 +46,60 @@ class AppNavigation {
             navigatorKey: _shellNavigatorProducts,
             routes: <RouteBase>[
               GoRoute(
-                path: "/products",
-                name: "Products",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const ProductScreen(),
-                routes: [
-                  GoRoute(
-                    parentNavigatorKey: _rootNavigatorKey,
-                    path: 'product-details',
-                    name: "ProductDetails",
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child:   ProductDetailsScreen(
+                  path: "/products",
+                  name: "Products",
+                  builder: (BuildContext context, GoRouterState state) =>
+                      const ProductScreen(),
+                  routes: [
+                    ///Product Details
+                    GoRoute(
+                        parentNavigatorKey: _rootNavigatorKey,
+                        path: 'product-details',
+                        name: "ProductDetails",
+                        pageBuilder: (context, state) =>
+                            CustomTransitionPage<void>(
+                              key: state.pageKey,
+                              child: ProductDetailsScreen(
+                                key: state.pageKey,
+                              ),
+                              transitionsBuilder: (context, animation,
+                                      secondaryAnimation, child) =>
+                                  FadeTransition(
+                                      opacity: animation, child: child),
+                            ),
+                        routes: [
+                          ///View Map
+                          GoRoute(
+                            parentNavigatorKey: _rootNavigatorKey,
+                            path: 'map-view',
+                            name: "MapView",
+                            pageBuilder: (context, state) =>
+                                CustomTransitionPage<void>(
+                              key: state.pageKey,
+                              child: const MapViewScreen(),
+                              transitionsBuilder: (context, animation,
+                                      secondaryAnimation, child) =>
+                                  FadeTransition(
+                                      opacity: animation, child: child),
+                            ),
+                          ),
+                        ]),
+
+                    ///Add Products
+                    GoRoute(
+                      parentNavigatorKey: _rootNavigatorKey,
+                      path: 'add-product',
+                      name: "AddProductScreen",
+                      pageBuilder: (context, state) =>
+                          CustomTransitionPage<void>(
                         key: state.pageKey,
+                        child: const AddProductScreen(),
+                        transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
                       ),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
                     ),
-                  )
-                ]
-              ),
+                  ]),
             ],
           ),
 
@@ -146,17 +181,17 @@ class AppNavigation {
               parentNavigatorKey: _rootNavigatorKey,
               path: 'new-password',
               name: "NewPassword",
-             /* builder: (context, state) => NewPasswordScreen(
+              /* builder: (context, state) => NewPasswordScreen(
                 key: state.pageKey,
               ),*/
               pageBuilder: (context, state) => CustomTransitionPage<void>(
                 key: state.pageKey,
-                child:   NewPasswordScreen(
+                child: NewPasswordScreen(
                   key: state.pageKey,
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
+                        FadeTransition(opacity: animation, child: child),
               ),
             ),
 
@@ -165,7 +200,7 @@ class AppNavigation {
               parentNavigatorKey: _rootNavigatorKey,
               path: 'sign-up',
               name: "SignUp",
-             /* builder: (context, state) => SignUpScreen(
+              /* builder: (context, state) => SignUpScreen(
                 key: state.pageKey,
               ),*/
               pageBuilder: (context, state) => CustomTransitionPage<void>(
@@ -175,7 +210,7 @@ class AppNavigation {
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
+                        FadeTransition(opacity: animation, child: child),
               ),
             ),
           ]),

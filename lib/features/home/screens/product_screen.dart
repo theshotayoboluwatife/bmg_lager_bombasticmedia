@@ -38,7 +38,9 @@ class ProductScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.goNamed('MapView');
+        },
         backgroundColor: AppColor.blue,
         child: const Icon(
           Icons.add,

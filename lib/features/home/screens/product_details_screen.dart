@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/rounded_corner_image.dart';
@@ -52,7 +52,8 @@ class ProductDetailsScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   //height: size.height * 0.4,
-                  padding: const EdgeInsets.only(left:24.0, right:24.0, bottom: 32.0, top: 32.0),
+                  padding: const EdgeInsets.only(
+                      left: 24.0, right: 24.0, bottom: 32.0, top: 32.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: AppColor.containerGrey,
@@ -66,73 +67,72 @@ class ProductDetailsScreen extends StatelessWidget {
                         imageSize: size.height * 0.22,
                       ),
                       const Gap(30.0),
-                       Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: size.height * 0.08,
-                              height: size.height * 0.08,
-                              padding: const EdgeInsets.all(12.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  border: Border.all(
-                                      color: AppColor.blue, width: 1.0)),
-                              child:  RoundedCornerImage(
-                                imageUrl: 'assets/images/bmg_trashcan.jpg',
-                                imageSize: size.height * 0.06,
-                              ),
-                            ),
-                            Container(
-                              width: size.height * 0.08,
-                              height: size.height * 0.08,
-                              padding: const EdgeInsets.all(12.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: size.height * 0.08,
+                            height: size.height * 0.08,
+                            padding: const EdgeInsets.all(12.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Image.asset(
-                                'assets/images/bmg_tc1.png',
+                                border: Border.all(
+                                    color: AppColor.blue, width: 1.0)),
+                            child: RoundedCornerImage(
+                              imageUrl: 'assets/images/bmg_trashcan.jpg',
+                              imageSize: size.height * 0.06,
+                            ),
+                          ),
+                          Container(
+                            width: size.height * 0.08,
+                            height: size.height * 0.08,
+                            padding: const EdgeInsets.all(12.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Image.asset(
+                              'assets/images/bmg_tc1.png',
                               //  width: size.height * 0.06,
-                               // height: size.height * 0.06,
-                              ),
+                              // height: size.height * 0.06,
                             ),
-                            Container(
-                              width: size.height * 0.08,
-                              height: size.height * 0.08,
-                              padding: const EdgeInsets.all(12.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Image.asset(
-                                'assets/images/bmg_tc2.png',
+                          ),
+                          Container(
+                            width: size.height * 0.08,
+                            height: size.height * 0.08,
+                            padding: const EdgeInsets.all(12.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Image.asset(
+                              'assets/images/bmg_tc2.png',
                               //  width: 50,
-                               // height: 50,
-                              ),
+                              // height: 50,
                             ),
-                            Container(
-                              width: size.height * 0.08,
-                              height: size.height * 0.08,
-                              padding: const EdgeInsets.all(12.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Image.asset(
-                                'assets/images/bmg_tc1.png',
-                                //width: 50,
-                                //height: 50,
-                              ),
+                          ),
+                          Container(
+                            width: size.height * 0.08,
+                            height: size.height * 0.08,
+                            padding: const EdgeInsets.all(12.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
-                          ],
-                        ),
-
+                            child: Image.asset(
+                              'assets/images/bmg_tc1.png',
+                              //width: 50,
+                              //height: 50,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -193,6 +193,23 @@ class ProductDetailsScreen extends StatelessWidget {
                   text: 'Longitude: 62°77’80.7”N    Latitude: 90°77’34”.96E',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
+                ),
+                const Gap(20),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                  onPressed: () => context.goNamed('ViewMap'),
+                  child: const Text('View On Map'),
                 ),
               ],
             ),

@@ -57,7 +57,8 @@ class ProductScreen extends StatelessWidget {
         color: Colors.white,
         child: SafeArea(
           child: SingleChildScrollView(
-            child: SizedBox(
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 20.0),
               width: double.infinity,
               height: MediaQuery.of(context).size.height,
               child: Column(

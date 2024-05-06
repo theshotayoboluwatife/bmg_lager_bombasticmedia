@@ -47,11 +47,12 @@ class ProductDetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: double.infinity,
-                  height: size.height * 0.4,
-                  padding: const EdgeInsets.all(16.0),
+                  //height: size.height * 0.4,
+                  padding: const EdgeInsets.only(left:24.0, right:24.0, bottom: 32.0, top: 32.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: AppColor.containerGrey,
@@ -62,76 +63,76 @@ class ProductDetailsScreen extends StatelessWidget {
                     children: [
                       RoundedCornerImage(
                         imageUrl: 'assets/images/bmg_trashcan.jpg',
-                        imageSize: size.height * 0.3,
+                        imageSize: size.height * 0.22,
                       ),
                       const Gap(30.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 80,
-                            height: 80,
-                            padding: const EdgeInsets.all(12.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
+                       Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: size.height * 0.08,
+                              height: size.height * 0.08,
+                              padding: const EdgeInsets.all(12.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.all(
+                                      color: AppColor.blue, width: 1.0)),
+                              child:  RoundedCornerImage(
+                                imageUrl: 'assets/images/bmg_trashcan.jpg',
+                                imageSize: size.height * 0.06,
+                              ),
+                            ),
+                            Container(
+                              width: size.height * 0.08,
+                              height: size.height * 0.08,
+                              padding: const EdgeInsets.all(12.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(
-                                    color: AppColor.blue, width: 1.0)),
-                            child: Image.asset(
-                              'assets/images/bmg_trashcan.jpg',
-                              width: 50,
-                              height: 50,
+                              ),
+                              child: Image.asset(
+                                'assets/images/bmg_tc1.png',
+                              //  width: size.height * 0.06,
+                               // height: size.height * 0.06,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 80,
-                            padding: const EdgeInsets.all(12.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
+                            Container(
+                              width: size.height * 0.08,
+                              height: size.height * 0.08,
+                              padding: const EdgeInsets.all(12.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Image.asset(
+                                'assets/images/bmg_tc2.png',
+                              //  width: 50,
+                               // height: 50,
+                              ),
                             ),
-                            child: Image.asset(
-                              'assets/images/bmg_tc1.png',
-                              width: 50,
-                              height: 50,
+                            Container(
+                              width: size.height * 0.08,
+                              height: size.height * 0.08,
+                              padding: const EdgeInsets.all(12.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Image.asset(
+                                'assets/images/bmg_tc1.png',
+                                //width: 50,
+                                //height: 50,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 80,
-                            padding: const EdgeInsets.all(12.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Image.asset(
-                              'assets/images/bmg_tc2.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 80,
-                            padding: const EdgeInsets.all(12.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Image.asset(
-                              'assets/images/bmg_tc1.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                        ],
-                      )
+                          ],
+                        ),
+
                     ],
                   ),
                 ),

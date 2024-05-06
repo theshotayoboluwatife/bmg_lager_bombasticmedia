@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             actions: [
               AppButton(
-                onPressed: () => context.goNamed('Home'),
+                onPressed: () => context.goNamed('Products'),
                 text: 'Go to Home',
               )
             ],

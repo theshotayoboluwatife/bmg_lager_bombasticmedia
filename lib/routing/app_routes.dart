@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 
 import '../features/authentication/screens/sign_in_screen.dart';
 import '../features/authentication/screens/sign_up_screen.dart';
-import '../features/home/screens/export_inventory_screen.dart';
 import '../features/home/screens/scan_qr_screen.dart';
 import '../features/home/screens/search_screen.dart';
 import '../features/home/widgets/home_wrapper.dart';
@@ -48,41 +47,6 @@ class AppNavigation {
                 name: "Products",
                 builder: (BuildContext context, GoRouterState state) =>
                     const ProductScreen(),
-                /* routes: [
-                  GoRoute(
-                    path: 'menu',
-                    name: 'Menu',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const MenuDrawer(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                  GoRoute(
-                    path: 'order',
-                    name: 'Order',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const OrderScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                  GoRoute(
-                    path: 'food-combo',
-                    name: 'FoodCombo',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const FoodComboScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                ],*/
               ),
             ],
           ),
@@ -95,64 +59,10 @@ class AppNavigation {
                 path: "/search",
                 name: "Search",
                 builder: (BuildContext context, GoRouterState state) =>
-                const SearchScreen(),
-                /* routes: [
-                  GoRoute(
-                    path: 'menu',
-                    name: 'Menu',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const MenuDrawer(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                  GoRoute(
-                    path: 'order',
-                    name: 'Order',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const OrderScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                  GoRoute(
-                    path: 'food-combo',
-                    name: 'FoodCombo',
-                    pageBuilder: (context, state) => CustomTransitionPage<void>(
-                      key: state.pageKey,
-                      child: const FoodComboScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) =>
-                          FadeTransition(opacity: animation, child: child),
-                    ),
-                  ),
-                ],*/
+                    const SearchScreen(),
               ),
             ],
           ),
-
-          ///   Export
-         /* StatefulShellBranch(
-            navigatorKey: _shellNavigatorExport,
-            routes: <RouteBase>[
-              GoRoute(
-                path: "/export-inventory",
-                name: "ExportInventory",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const ExportInventoryScreen(),
-              ),
-              *//* GoRoute(
-                path: "/user-profile",
-                name: "UserProfile",
-                builder: (BuildContext context, GoRouterState state) =>
-                const UserProfileScreen(),
-              ),*//*
-            ],
-          ),*/
 
           ///   Scan QR
           StatefulShellBranch(
@@ -171,53 +81,87 @@ class AppNavigation {
 
       /// SignIn
       GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        path: '/sign-in',
-        name: "SignIn",
-        builder: (context, state) => SignInScreen(
-          key: state.pageKey,
-        ),
-      ),
+          parentNavigatorKey: _rootNavigatorKey,
+          path: '/sign-in',
+          name: "SignIn",
+          builder: (context, state) => SignInScreen(
+                key: state.pageKey,
+              ),
+          routes: [
+            ///Forget Password
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: 'forget-password',
+              name: "ForgetPassword",
+              /* builder: (context, state) => ForgetPasswordScreen(
+              key: state.pageKey,
+            ),*/
+              pageBuilder: (context, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const ForgetPasswordScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+              ),
+            ),
 
-      ///SignUp
-      GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        path: '/sign-up',
-        name: "SignUp",
-        builder: (context, state) => SignUpScreen(
-          key: state.pageKey,
-        ),
-      ),
+            ///VerifyOTP
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: 'verify-otp',
+              name: "VerifyOTP",
+              /*builder: (context, state) => VerifyOTPScreen(
+              key: state.pageKey,
+            ),*/
+              pageBuilder: (context, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: VerifyOTPScreen(
+                  key: state.pageKey,
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+              ),
+            ),
 
-      ///Forget Password
-      GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        path: '/forget-password',
-        name: "ForgetPassword",
-        builder: (context, state) => ForgetPasswordScreen(
-          key: state.pageKey,
-        ),
-      ),
+            ///Set New Password
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: 'new-password',
+              name: "NewPassword",
+             /* builder: (context, state) => NewPasswordScreen(
+                key: state.pageKey,
+              ),*/
+              pageBuilder: (context, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child:   NewPasswordScreen(
+                  key: state.pageKey,
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                    FadeTransition(opacity: animation, child: child),
+              ),
+            ),
 
-      ///VerifyOTP
-      GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        path: '/verify-otp',
-        name: "VerifyOTP",
-        builder: (context, state) => VerifyOTPScreen(
-          key: state.pageKey,
-        ),
-      ),
-
-      ///Set New Password
-      GoRoute(
-        parentNavigatorKey: _rootNavigatorKey,
-        path: '/new-password',
-        name: "NewPassword",
-        builder: (context, state) => NewPasswordScreen(
-          key: state.pageKey,
-        ),
-      ),
+            ///SignUp
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              path: 'sign-up',
+              name: "SignUp",
+             /* builder: (context, state) => SignUpScreen(
+                key: state.pageKey,
+              ),*/
+              pageBuilder: (context, state) => CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: SignUpScreen(
+                  key: state.pageKey,
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                    FadeTransition(opacity: animation, child: child),
+              ),
+            ),
+          ]),
     ],
   );
 }

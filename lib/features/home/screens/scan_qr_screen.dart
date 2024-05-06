@@ -5,14 +5,13 @@ import '../widgets/scanQR/scanner_button_widgets.dart';
 import '../widgets/scanQR/scanner_error_widget.dart';
 
 class ScanQRScreen extends StatefulWidget {
-  const ScanQRScreen({super.key});
+  const ScanQRScreen({Key? key}) : super(key: key);
 
   @override
-  _ScanQRScreenState createState() =>
-      _ScanQRScreenState();
+  _ScanQRScreenState createState() => _ScanQRScreenState();
 }
 
-class _ScanQRScreenState  extends State<ScanQRScreen> {
+class _ScanQRScreenState extends State<ScanQRScreen> {
   final MobileScannerController controller = MobileScannerController(
     formats: const [BarcodeFormat.qrCode],
   );
@@ -26,22 +25,20 @@ class _ScanQRScreenState  extends State<ScanQRScreen> {
   @override
   Widget build(BuildContext context) {
     final scanWindow = Rect.fromCenter(
-      center: MediaQuery.sizeOf(context).center(Offset.zero),
+      center: MediaQuery.of(context).size.center(Offset.zero),
       width: 200,
       height: 200,
+      //MediaQuery.of(context).size.height,
     );
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('Scanner with Overlay Example app'),
-      ),
+      backgroundColor: Colors.transparent, // Set scaffold background color to transparent
       body: Stack(
         fit: StackFit.expand,
         children: [
           Center(
             child: MobileScanner(
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               controller: controller,
               scanWindow: scanWindow,
               errorBuilder: (context, error, child) {
@@ -91,9 +88,9 @@ class _ScanQRScreenState  extends State<ScanQRScreen> {
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     super.dispose();
-    await controller.dispose();
+    controller.dispose();
   }
 }
 
@@ -110,7 +107,7 @@ class ScannerOverlay extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // TODO: use `Offset.zero & size` instead of Rect.largest
     // we need to pass the size to the custom paint widget
-    final backgroundPath = Path()..addRect(Rect.largest);
+    final backgroundPath = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
 
     final cutoutPath = Path()
       ..addRRect(

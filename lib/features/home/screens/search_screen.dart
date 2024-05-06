@@ -36,7 +36,7 @@ class SearchScreen extends StatelessWidget {
                               searchTextController: searchTextController)),
                       const Gap(8.0),
                       const AppText(
-                        text: 'Cancel',
+                        text: 'Filter',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         textAlign: TextAlign.right,

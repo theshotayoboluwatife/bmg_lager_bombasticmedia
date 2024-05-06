@@ -3,46 +3,49 @@ import 'package:gap/gap.dart';
 
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
+import '../widgets/search_container.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController searchTextController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.navigate_before,
-            color: Colors.black,
-            size: 32,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+        ),
         color: Colors.white,
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const AppText(
-                text: 'Search Inventory',
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(20.0),
+                  Row(
+                    children: [
+                      Flexible(
+                          child: SearchContainer(
+                              searchTextController: searchTextController)),
+                      const Gap(8.0),
+                      const AppText(
+                        text: 'Cancel',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        textAlign: TextAlign.right,
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const Gap(10),
-              AppText(
-                text: 'Here, you can search for products in the inventory!',
-                color: AppColor.grey,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ],
+            ),
           ),
         ),
       ),

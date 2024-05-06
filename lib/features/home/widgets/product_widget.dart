@@ -89,6 +89,7 @@ class ProductItem extends StatelessWidget {
                 child: AppText(
                   text: '$status',
                   fontSize: 12,
+                  color: Colors.white,
                   fontWeight: FontWeight.w400,
                 ),
               )

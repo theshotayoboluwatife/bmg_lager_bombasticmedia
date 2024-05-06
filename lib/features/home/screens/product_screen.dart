@@ -42,7 +42,7 @@ class ProductScreen extends StatelessWidget {
         child: const Icon(
           Icons.add,
           color: Colors.white,
-          size: 24,
+          size: 36,
         ),
 
       ),

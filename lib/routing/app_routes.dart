@@ -67,29 +67,29 @@ class AppNavigation {
                                   FadeTransition(
                                       opacity: animation, child: child),
                             ),
-                        routes: [
-                          ///View Map
-                          GoRoute(
-                            parentNavigatorKey: _rootNavigatorKey,
-                            path: 'map-view',
-                            name: "MapView",
-                            pageBuilder: (context, state) =>
-                                CustomTransitionPage<void>(
-                              key: state.pageKey,
-                              child: const MapViewScreen(),
-                              transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) =>
-                                  FadeTransition(
-                                      opacity: animation, child: child),
-                            ),
+                       ),
+
+                    ///View Map
+                    GoRoute(
+                      parentNavigatorKey: _rootNavigatorKey,
+                      path: 'view-map',
+                      name: "ViewMap",
+                      pageBuilder: (context, state) =>
+                          CustomTransitionPage<void>(
+                            key: state.pageKey,
+                            child: const MapViewScreen(),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) =>
+                                FadeTransition(
+                                    opacity: animation, child: child),
                           ),
-                        ]),
+                    ),
 
                     ///Add Products
                     GoRoute(
                       parentNavigatorKey: _rootNavigatorKey,
                       path: 'add-product',
-                      name: "AddProductScreen",
+                      name: "AddProducts",
                       pageBuilder: (context, state) =>
                           CustomTransitionPage<void>(
                         key: state.pageKey,

@@ -2,13 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../utility/constants.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
 
-class VerifyOTPScreen extends StatelessWidget {
-  const VerifyOTPScreen({super.key});
+class VerifyOTPScreen extends StatefulWidget {
+  const VerifyOTPScreen({Key? key}) : super(key: key);
+
+  @override
+  State<VerifyOTPScreen> createState() => _OTPVerificationState();
+}
+
+class _OTPVerificationState extends State<VerifyOTPScreen> {
+  TextEditingController pinController = TextEditingController();
+
+  @override
+  void dispose() {
+    pinController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +64,32 @@ class VerifyOTPScreen extends StatelessWidget {
               const Gap(30),
 
               ///OTP FIELD PACKAGE
-              Container(
-                width: double.infinity,
-                height: 20,
-                color: Colors.grey,
+              PinCodeTextField(
+                appContext: context,
+                textStyle: const TextStyle(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                ),
+                length: 6,
+                enableActiveFill: true,
+                keyboardType: TextInputType.phone,
+                pinTheme: PinTheme(
+                  inactiveFillColor: Colors.white,
+                  inactiveColor: AppColor.grey,
+                  activeFillColor: AppColor.blue,
+                  activeColor: Colors.white,
+                  selectedColor: Colors.black,
+                  selectedFillColor: Colors.blue[100],
+                  borderWidth: 1,
+                  borderRadius: BorderRadius.circular(16),
+                  fieldWidth: 55,
+                  fieldHeight: 55,
+                  shape: PinCodeFieldShape.box,
+                ),
+                cursorColor: Colors.white,
+                onChanged: (value) {},
+                onCompleted: (value) {},
+                controller: pinController,
               ),
               const Gap(30),
               Align(

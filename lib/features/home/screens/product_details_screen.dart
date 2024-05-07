@@ -44,7 +44,7 @@ class ProductDetailsScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left:20.0, right:20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,22 +195,26 @@ class ProductDetailsScreen extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 const Gap(20),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(16),
+                        ),
                       ),
                     ),
+                    onPressed: () => context.goNamed('ViewMap'),
+                    child: const Text('View On Map'),
                   ),
-                  onPressed: () => context.goNamed('ViewMap'),
-                  child: const Text('View On Map'),
                 ),
+                const Gap(20.0)
               ],
             ),
           ),

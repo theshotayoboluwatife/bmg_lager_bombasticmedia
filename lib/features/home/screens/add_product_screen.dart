@@ -78,8 +78,61 @@ class AddProductScreen extends StatelessWidget {
                 ///STATUS GRADE CONTAINER
                 Container(
                   width: double.infinity,
-                  height: 60,
-                  color: Colors.grey,
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    border: Border.all(color: AppColor.grey, width: 1)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Container(
+                          width:double.infinity,
+                          height: 35,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: AppColor.blue,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                            child: const AppText(text: 'Grade 1', color: Colors.white, fontWeight: FontWeight.w400, textAlign: TextAlign.center,),
+                        
+                        ),
+                      ),
+                      const Gap(4.0),
+                      Flexible(
+                        child: Container(
+                          width:double.infinity,
+                          height: 35,
+                          alignment: Alignment.center,
+
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: const AppText(text: 'Grade 2', color: Colors.black, fontWeight: FontWeight.w400, textAlign: TextAlign.center,),
+
+                        ),
+                      ),
+                      const Gap(4.0),
+                      Flexible(
+                        child: Container(
+                          width:double.infinity,
+                          height: 35,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color:  Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: const AppText(text: 'Grade 3', color: Colors.black, fontWeight: FontWeight.w400, textAlign:  TextAlign.center,),
+
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const Gap(30),
                 const AppText(

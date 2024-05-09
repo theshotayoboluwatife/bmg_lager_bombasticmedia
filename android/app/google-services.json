@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "716430801618",
+    "project_id": "bmg-lager",
+    "storage_bucket": "bmg-lager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716430801618:android:830d043ebd8a23cf054b0b",
+        "android_client_info": {
+          "package_name": "com.bombasticmedia.bmg_lager_bombasticmedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZXcaqJ2v8gsSo9zdgTgraB-kZrPvGbWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

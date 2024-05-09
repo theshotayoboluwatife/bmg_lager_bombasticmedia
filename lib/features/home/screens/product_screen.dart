@@ -94,11 +94,14 @@ class ProductScreen extends StatelessWidget {
                               context.goNamed('ProductDetails');
                             },
                             child: ProductItem(
-                                imageUrl: list[index].imageUrl,
-                                productName: list[index].productName,
-                                location: list[index].location,
-                                productId: list[index].productId,
-                                status: list[index].status),
+                              imageUrl: list[index].imageUrl,
+                              productName: list[index].productName,
+                              location: list[index].location,
+                              productStatus: list[index].productStatus,
+                              latitude: -23.0,
+                              longitude: 45.989,
+                              code: '1235453',
+                            ),
                           );
                         },
                       ),

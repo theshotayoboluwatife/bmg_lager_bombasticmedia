@@ -8,30 +8,32 @@ import '../../../utility/constants.dart';
 import '../../../widgets/rounded_corner_image.dart';
 
 class ProductItem extends StatelessWidget {
-  final String imageUrl, productName, location;
-  final int productId, status;
+  final String imageUrl, productName, location, productStatus, code;
+  final double longitude, latitude;
 
-  const ProductItem(
-      {super.key,
-      required this.imageUrl,
-      required this.productName,
-      required this.location,
-      required this.productId,
-      required this.status});
+  const ProductItem({
+    super.key,
+    required this.imageUrl,
+    required this.productName,
+    required this.location,
+    required this.latitude,
+    required this.longitude,
+    required this.productStatus,
+    required this.code
+  });
 
-  Color getColor(int status) {
+  Color getColor(String status) {
     switch (status) {
-      case 1:
+      case '1':
         return CanStatus.gradeOne.color;
-      case 2:
+      case '2':
         return CanStatus.gradeTwo.color;
-      case 3:
+      case '3':
         return CanStatus.gradeThree.color;
       default:
         return AppColor.grey;
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     const Gap(2.0),
                     AppText(
-                      text: '$productId',
+                      text: code,
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: AppColor.grey,
@@ -84,10 +86,10 @@ class ProductItem extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
               CircleAvatar(
-                backgroundColor: getColor(status),
+                backgroundColor: getColor(productStatus),
                 maxRadius: 10.0,
-                child: AppText(
-                  text: '$status',
+                child: const AppText(
+                  text: 'productStatus',
                   fontSize: 12,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
@@ -99,5 +101,4 @@ class ProductItem extends StatelessWidget {
       ),
     );
   }
-
 }

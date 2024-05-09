@@ -22,17 +22,32 @@ class MapViewScreen extends StatelessWidget {
             ),
             children: [
               TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
+                urlTemplate:
+                    'https://api.mapbox.com/styles/v1/shotayobolu/clvyv31400a6201nu72e7bnxl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2hvdGF5b2JvbHUiLCJhIjoiY2x2eXV3a2w4MnJnMTJxcXoyd2Jsc3Z1NyJ9.kJa0trn8DAhCG0vHP9QILw',
+                additionalOptions: const {
+                  'accessToken':
+                      'pk.eyJ1Ijoic2hvdGF5b2JvbHUiLCJhIjoiY2x2eXV3a2w4MnJnMTJxcXoyd2Jsc3Z1NyJ9.kJa0trn8DAhCG0vHP9QILw',
+                  'id': 'mapbox.mapbox-streets-v8'
+                },
               ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    point: const LatLng(51.5, -0.09),
+                    child: Image.asset(
+                        'assets/images/brand_identity/bmglager_app_icon.png'),
+                  )
+                ],
+              )
             ],
           ),
           Positioned(
             bottom: 0,
             left: 0,
-            right:0,
+            right: 0,
             child: Padding(
-              padding: const EdgeInsets.only(bottom:20.0, left: 20.0, right:20.0),
+              padding:
+                  const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
               child: Container(
                 padding: const EdgeInsets.all(12.0),
                 width: double.infinity,

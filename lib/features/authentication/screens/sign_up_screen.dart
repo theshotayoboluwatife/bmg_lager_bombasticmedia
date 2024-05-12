@@ -1,10 +1,14 @@
+import 'package:BmgLager/features/home/screens/product_screen.dart';
+import 'package:BmgLager/services/app_auth.dart';
 import 'package:BmgLager/widgets/app_button.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
 import 'package:go_router/go_router.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -23,6 +27,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
+
+void showSnack(String text, BuildContext context) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+      ),
+    );
+  }
+
+
     void showDialogBox() {
       showDialog(
         context: context,
@@ -38,7 +53,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             actions: [
               AppButton(
-                onPressed: () => context.goNamed('Products'),
+                onPressed: () async {
+                 
+                            if (emailController.text.isEmpty) {
+                              showSnack('Name cannot be empty', context);
+                              return;
+                            }
+                            if (!EmailValidator.validate(
+                                emailController.text)) {
+                              showSnack('Invalid Email', context);
+                              return;
+                            }
+                            if (passwordController.text.length < 6) {
+                              showSnack(
+                                  'Password must be greater than 6 characters',
+                                  context);
+                              return;
+                            }
+                           
+                            // setState(() {
+                            //   isClicked = true;
+                            // });
+                            try {
+                              var result = await Auth.account(
+                                  emailController.text,
+                                  passwordController.text,
+                                  AuthMode.register);
+                              // await FireStore.addUserToDatabase(
+                              //   UserModel(
+                              //     id: result.user!.uid,
+                              //     email: emailController.text,
+                              //     profilePhoto:
+                              //         'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                              //     name: nameController.text,
+                              //     username: usernameController.text,
+                              //     bio: bioController.text,
+                              //   ),
+                              // );
+
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (_) => const ProductScreen(),
+                                  ),
+                                  (route) => false);
+                              // setState(() {
+                              //   isClicked = false;
+                              // });
+                            } catch (e) {
+                              showSnack(e.toString(), context);
+                              // setState(() {
+                              //   isClicked = false;
+                              // });
+                            }
+                          }, 
+      
                 text: 'Go to Home',
               )
             ],

@@ -14,23 +14,22 @@ class Auth {
     }
   }
 
-  static Future<UserCredential> account(
+  static Future<void> account(
       String email, dynamic password, AuthMode mode) async {
-    var userCredential;
     try {
       if (mode == AuthMode.login) {
-        userCredential = await auth.signInWithEmailAndPassword(
+        await auth.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
       } else if (mode == AuthMode.register) {
-        userCredential = await auth.createUserWithEmailAndPassword(
+        await auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
       }
-      return userCredential;
-    } catch (e) {
+      }
+      catch (e) {
       rethrow;
     }
   }

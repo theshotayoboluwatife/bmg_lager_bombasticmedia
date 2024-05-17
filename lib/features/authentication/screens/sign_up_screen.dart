@@ -2,12 +2,16 @@ import 'package:BmgLager/features/home/screens/product_screen.dart';
 import 'package:BmgLager/services/app_auth.dart';
 import 'package:BmgLager/widgets/app_button.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/email_password_textfield.dart';
+import '../../../helpers/logger.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -30,21 +34,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+  bool _isLoading = false;
 
   Future<void> _signUp() async {
+    FocusManager.instance.primaryFocus?.unfocus();
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+      logger.i('validated');
       try {
-        var result = await Auth.account(
-          emailController.text,
+        await Auth.account(
+          emailController.text.trim(),
           passwordController.text,
           AuthMode.register,
         );
 
-        showDialogBox();
-
-      } catch (e) {
-        showSnack(e.toString(), context);
+      } on FirebaseAuthException catch (e) {
+        logger.e(e);
+        ScaffoldMessenger.of(context)
+            .removeCurrentSnackBar();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(
+          content: Text(e.message!),
+        ));
+        setState(() {
+          _isLoading = false;
+        });
       }
+      setState(() {
+        _isLoading = false;
+      });
+      showDialogBox();
     }
   }
 
@@ -64,18 +85,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           actions: [
             AppButton(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (_) => const ProductScreen(),
-                  ),
-                      (route) => false,
-                );
+                context.goNamed('Products');
               },
               text: 'Go to Home',
             )
           ],
           content:  AppText(
-            text: 'Your account has been created',
+            text: 'Your account has been created!',
             fontWeight: FontWeight.w400,
             fontSize: 14,
             color: AppColor.grey,
@@ -86,12 +102,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
- /* Center(
-  child: LoadingAnimationWidget.staggeredDotWave(
-  color: Colors.white,
-  size: 200,
-  ),
-  )*/
 
   @override
   Widget build(BuildContext context) {
@@ -143,9 +153,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Gap(8.0),
                   PasswordTextField(controller: confirmPasswordController),
                   const Gap(120.0),
-                  AppButton(
-                    onPressed: _signUp,
-                    text: 'Create Account',
+                  _isLoading
+                      ? Center(
+                    child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: AppColor.blue,
+                      size: 50,
+                    ),
+                  )
+                      : AppButton(
+                    onPressed: ()=> _signUp(),
+                    text: 'Sign Up',
                   ),
                   const Gap(8.0),
                   Align(

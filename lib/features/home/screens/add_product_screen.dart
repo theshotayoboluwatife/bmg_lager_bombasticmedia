@@ -5,14 +5,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/dotted_image_card.dart';
 
-class AddProductScreen extends StatelessWidget {
+class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
 
+  @override
+  State<AddProductScreen> createState() => _AddProductScreenState();
+}
+
+class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController productNameController = TextEditingController();
@@ -20,6 +28,8 @@ class AddProductScreen extends StatelessWidget {
     final TextEditingController codeController = TextEditingController();
     final TextEditingController locationController = TextEditingController();
     final TextEditingController latitudeController = TextEditingController();
+
+    List<XFile> imagesToUpload = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +52,7 @@ class AddProductScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: const EdgeInsets.only(left:20.0, right: 20.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,11 +64,11 @@ class AddProductScreen extends StatelessWidget {
                 const Gap(4.0),
 
                 ///IMAGE PICKER PACKAGE
-                const Row(
+                Row(
                   children: [
-                    DottedImageCard(),
-                    DottedImageCard(),
-                    DottedImageCard(),
+                    DottedImageCard(imagesList: imagesToUpload),
+                    DottedImageCard(imagesList: imagesToUpload),
+                    DottedImageCard(imagesList: imagesToUpload),
                   ],
                 ),
                 const Gap(30),
@@ -80,15 +90,14 @@ class AddProductScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                    border: Border.all(color: AppColor.grey, width: 1)
-                  ),
+                      borderRadius: BorderRadius.circular(16.0),
+                      border: Border.all(color: AppColor.grey, width: 1)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
                         child: Container(
-                          width:double.infinity,
+                          width: double.infinity,
                           height: 35,
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(8.0),
@@ -96,39 +105,50 @@ class AddProductScreen extends StatelessWidget {
                             color: AppColor.blue,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                            child: const AppText(text: 'Grade 1', color: Colors.white, fontWeight: FontWeight.w400, textAlign: TextAlign.center,),
-                        
+                          child: const AppText(
+                            text: 'Grade 1',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       const Gap(4.0),
                       Flexible(
                         child: Container(
-                          width:double.infinity,
+                          width: double.infinity,
                           height: 35,
                           alignment: Alignment.center,
-
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          child: const AppText(text: 'Grade 2', color: Colors.black, fontWeight: FontWeight.w400, textAlign: TextAlign.center,),
-
+                          child: const AppText(
+                            text: 'Grade 2',
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       const Gap(4.0),
                       Flexible(
                         child: Container(
-                          width:double.infinity,
+                          width: double.infinity,
                           height: 35,
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
-                            color:  Colors.white,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          child: const AppText(text: 'Grade 3', color: Colors.black, fontWeight: FontWeight.w400, textAlign:  TextAlign.center,),
-
+                          child: const AppText(
+                            text: 'Grade 3',
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ],
@@ -190,16 +210,18 @@ class AddProductScreen extends StatelessWidget {
                         border: Border.all(color: AppColor.grey, width: 1),
                       ),
                       alignment: Alignment.center,
-                      child: IconButton(padding: EdgeInsets.zero, iconSize: 1,
-                        onPressed: (){},
-                        icon: const Icon(Icons.location_searching, size: 24, color: Colors.black54),
-
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        iconSize: 1,
+                        onPressed: () {},
+                        icon: const Icon(Icons.location_searching,
+                            size: 24, color: Colors.black54),
                       ),
                     ),
                   ],
                 ),
                 const Gap(60.0),
-                  Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Flexible(
@@ -229,12 +251,12 @@ class AddProductScreen extends StatelessWidget {
                       child: SizedBox(
                         width: double.infinity,
                         height: 40,
-                        child: AppButton(onPressed: () {  }, text: 'Add Product',
-                      
-                          ),
+                        child: AppButton(
+                          onPressed: () {},
+                          text: 'Add Product',
+                        ),
                       ),
                     ),
-                    
                   ],
                 )
               ],

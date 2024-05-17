@@ -37,8 +37,6 @@ class _SignInScreenState extends State<SignInScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Sign In Successful')),
         );
-        // Navigate to the next screen or show a success message
-        context.goNamed('SignIn');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to sign in: $e')),
@@ -115,6 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       : AppButton(
                           onPressed: (){
                             _signIn();
+                            context.goNamed('Products');
                           },
                           text: 'Log in',
                         ),

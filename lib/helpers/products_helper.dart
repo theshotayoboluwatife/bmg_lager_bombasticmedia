@@ -1,110 +1,34 @@
-/*
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
-import '../models/entry_model.dart';
-import 'logger.dart';
+class ProductHelper{
 
-class EntriesHelperClass {
-  static FirebaseFirestore database = FirebaseFirestore.instance;
-  static FirebaseAuth auth = FirebaseAuth.instance;
-
-  static Future<void> uploadUserEntry(Entry entry) async {
-    try {
-      User? user = auth.currentUser;
-      if (user == null) {
-        logger.i('No user is currently signed in.');
-        return;
-      }
-
-      final userId = user.uid;
-      final docUser = database.collection('mood_entries').doc(userId);
-
-      await docUser.set({'initialEntryTime': '#${DateTime.timestamp()}'});
-
-      final entriesCollection = docUser.collection('entries');
-      await entriesCollection.add(entry.toJson());
-
-      logger.i('Demo entry added successfully!');
-    } catch (e) {
-      logger.i('Error uploading demo entry: $e');
-      rethrow;
-    }
+  static Future<XFile?> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery, imageQuality: 10,);
+    return pickedImage;
   }
 
-  static Future<void> uploadUserTmlEntry(TimeLineEntry tmlEntry) async {
-    try {
-      User? user = auth.currentUser;
-      if (user == null) {
-        logger.i('No user is currently signed in.');
-        return;
-      }
+  Future<void> uploadImageToFireStore(XFile? imageToUpload) async {
+    if (imageToUpload != null) {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference storageReference = FirebaseStorage.instance.ref().child('images/$fileName');
 
-      final userId = user.uid;
-      final docUser = database.collection('mood_entries').doc(userId);
-      await docUser.set({'initialEntryTime': '#${DateTime.timestamp()}'});
-      final entriesCollection = docUser.collection('timeline_entries');
-      await entriesCollection.add(tmlEntry.toJson());
+      UploadTask uploadTask = storageReference.putFile(File(imageToUpload.path));
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
-      logger.i('Entry added successfully!');
-    } catch (e) {
-      logger.i('Error uploading demo entry: $e');
-      rethrow;
-    }
-  }
+      await FirebaseFirestore.instance
+          .collection('images')
+          .add({'url': imageUrl});
 
-  static Future<List<Map<String, dynamic>>> fetchUserEntries() async {
-    try {
-      User? user = auth.currentUser;
-      if (user == null) {
-        logger.i('No user is currently signed in.');
-        return [];
-      }
-
-      final userId = user.uid;
-      final docUser = database.collection('mood_entries').doc(userId);
-      final entriesCollection = docUser.collection('entries');
-
-      QuerySnapshot<Map<String, dynamic>> querySnapshot =
-      await entriesCollection.orderBy('time', descending: false).get();
-
-      List<Map<String, dynamic>> entries =
-      querySnapshot.docs.map((doc) => doc.data()).toList();
-
-      return entries;
-    } catch (e) {
-      logger.i('Error fetching user entries: $e');
-      rethrow;
-    }
-  }
-
-  static Future<List<Map<String, dynamic>>> fetchUserTmlEntries() async {
-    try {
-      User? user = auth.currentUser;
-      if (user == null) {
-        logger.i('No user is currently signed in.');
-        return [];
-      }
-
-      final userId = user.uid;
-      final docUser = database.collection('mood_entries').doc(userId);
-      final timelineEntriesCollection = docUser.collection('timeline_entries');
-
-      QuerySnapshot<Map<String, dynamic>> querySnapshot =
-      await timelineEntriesCollection
-          .orderBy('time', descending: false)
-          .get();
-
-      List<Map<String, dynamic>> tmlEntries =
-      querySnapshot.docs.map((doc) => doc.data()).toList();
-
-      return tmlEntries;
-    } catch (e) {
-      logger.i('Error fetching user entries: $e');
-      rethrow;
+      print('Image uploaded successfully!');
+    } else {
+      print('No image picked!');
     }
   }
 
 
-
-}*/
+}

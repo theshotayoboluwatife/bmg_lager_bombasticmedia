@@ -7,11 +7,9 @@ import '../utility/constants.dart';
 import 'app_text.dart';
 
 class DottedImageCard extends StatefulWidget {
-  final List<XFile> imagesList;
 
   const DottedImageCard({
     Key? key,
-    required this.imagesList,
   }) : super(key: key);
 
   @override
@@ -19,8 +17,7 @@ class DottedImageCard extends StatefulWidget {
 }
 
 class _DottedImageCardState extends State<DottedImageCard> {
-  XFile? _pickedFile;
-
+  XFile? pickedFile;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -40,14 +37,10 @@ class _DottedImageCardState extends State<DottedImageCard> {
                 onTap: () async {
                   try {
                     var pickedFileHolder = await ProductHelper.pickImage();
-                    print(_pickedFile);
                     setState(() {
-                      _pickedFile = pickedFileHolder;
-                      widget.imagesList.add(_pickedFile!);
+                      pickedFile = pickedFileHolder;
+                      ProductHelper.imagesToUpload?.add(pickedFile!);
                     });
-                    print(_pickedFile);
-
-                    print(widget.imagesList);
                   } catch (e) {
                     print(e);
                     rethrow;
@@ -60,7 +53,7 @@ class _DottedImageCardState extends State<DottedImageCard> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: _pickedFile == null
+                    child: pickedFile == null
                         ? const BlankImage()
                         : FittedBox(
                             alignment: Alignment.center,
@@ -68,7 +61,7 @@ class _DottedImageCardState extends State<DottedImageCard> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(6.0),
                               child: Image.file(
-                                File(_pickedFile!.path),
+                                File(pickedFile!.path),
                                 fit: BoxFit.cover,
                                 height: 75,
                                 width: 80,

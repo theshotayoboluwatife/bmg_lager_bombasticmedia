@@ -25,11 +25,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController latitudeController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
-  List<XFile> imagesToUpload = [];
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -65,11 +63,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   const Gap(4.0),
 
                   ///IMAGE PICKER PACKAGE
-                  Row(
+                  const Row(
                     children: [
-                      DottedImageCard(imagesList: imagesToUpload),
-                      DottedImageCard(imagesList: imagesToUpload),
-                      DottedImageCard(imagesList: imagesToUpload),
+                      DottedImageCard(),
+                      DottedImageCard(),
+                      DottedImageCard(),
                     ],
                   ),
                   const Gap(30),
@@ -266,8 +264,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         isLoading = true;
                                       });
                                       await ProductHelper
-                                          .uploadImagesToFireStore(
-                                              imagesToUpload);
+                                          .uploadImagesToFireStore();
                                       setState(() {
                                         isLoading = false;
                                       });

@@ -2,11 +2,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 class ProductHelper {
 
   static List<XFile?>? imagesToUpload = [];
 
+  static Position? currentPosition;
 
   static Future<XFile?> pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -31,17 +34,7 @@ class ProductHelper {
            /*FirebaseFirestore.instance
               .collection('images')
               .add({'url': imageUrl});*/
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print('!!!!!!!!!!!!!!!!!!!!!!!!!---------------------------!');
-          print(imagesToUpload);
+
           print('Image $image uploaded successfully!');
         } else {
           print('No image picked!');
@@ -51,4 +44,14 @@ class ProductHelper {
       print('Error uploading image: $e');
     }
   }
+
+  static Future<Position> getCurrentPosition() async {
+    currentPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      return currentPosition!;
+
+  }
+
+
+
 }

@@ -46,6 +46,7 @@ dependencies:
   latlong2: ^0.9.1
   loading_animation_widget: ^1.2.1
   flutter_image_compress: ^2.3.0
+  geolocator: ^12.0.0
 
 
 
@@ -137,4 +138,3 @@ flutter:
       fonts:
         - asset: assets/fonts/MontserratRomanRegular.ttf
           weight: 400
-

@@ -24,6 +24,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController locationController = TextEditingController();
   final TextEditingController latitudeController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  double? longitude;
+  double? latitude;
   bool isLoading = false;
 
   @override
@@ -76,7 +78,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   const Gap(10.0),
-                  GeneralTextField(textController: productNameController),
+                  GeneralTextField(
+                    textController: productNameController,
+                    labelText: '',
+                  ),
                   const Gap(20.0),
                   const AppText(
                     text: 'Status',
@@ -162,8 +167,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   Row(
                     children: [
                       Flexible(
-                          child:
-                              GeneralTextField(textController: codeController)),
+                          child: GeneralTextField(
+                        textController: codeController,
+                        labelText: '',
+                      )),
                       const Gap(8.0),
                       Container(
                         decoration: BoxDecoration(
@@ -186,7 +193,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   const Gap(10.0),
-                  GeneralTextField(textController: locationController),
+                  GeneralTextField(
+                    textController: locationController,
+                    labelText: '',
+                  ),
                   const Gap(20.0),
                   Row(
                     children: [
@@ -194,12 +204,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: GeneralTextField(
                         textController: longitudeController,
                         hintText: 'Longitude',
+                        labelText: longitude.toString(),
                       )),
                       const Gap(4.0),
                       Flexible(
                         child: GeneralTextField(
                           textController: latitudeController,
                           hintText: 'Latitude',
+                          labelText: latitude.toString(),
                         ),
                       ),
                       const Gap(4.0),
@@ -212,7 +224,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           iconSize: 1,
-                          onPressed: () {},
+                          onPressed: () async {
+                            var currentPosition =
+                                await ProductHelper.getCurrentPosition();
+                            setState(() {
+                              longitude = currentPosition.longitude;
+                              latitude = currentPosition.latitude;
+                            });
+                          },
                           icon: const Icon(Icons.location_searching,
                               size: 24, color: Colors.black54),
                         ),

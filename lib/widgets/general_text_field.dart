@@ -5,10 +5,11 @@ import '../utility/constants.dart';
 class GeneralTextField extends StatelessWidget {
   final TextEditingController textController;
   final String? hintText;
+  final String? labelText;
 
   const GeneralTextField({
     super.key,
-    required this.textController,
+    required this.textController, required this.labelText,
     this.hintText = '',
   });
 
@@ -27,6 +28,8 @@ class GeneralTextField extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           isDense: true,
+          label: Text(labelText!) ,
+          labelText: labelText,
           hintText: hintText,
         ),
       ),
